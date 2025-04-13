@@ -3,33 +3,59 @@ package com.example.qlsv
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 
-class StudentAdapter(private val studentList: MutableList<Student>) :
-    RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+class StudentAdapter(val students: MutableList<StudentModel>): BaseAdapter() {
+    override fun getCount() = students.size
 
-    class StudentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textViewName: TextView = view.findViewById(R.id.editTextText)
-        val textViewID: TextView = view.findViewById(R.id.editTextNumber)
+    override fun getItem(p0: Int) = students[p0]
+
+    override fun getItemId(p0: Int) = p0.toLong()
+
+    override fun getView(
+        p0: Int,
+        p1: View?,
+        p2: ViewGroup?,
+    ): View? {
+
+        val itemView: View
+        val viewHolder: ViewHolder
+
+        if (p1 == null) {
+            itemView = LayoutInflater.from(p2?.context).inflate(R.layout.layout_student_item, p2, false)
+            viewHolder = ViewHolder()
+            viewHolder.imageAvatar = itemView.findViewById<ImageView>(R.id.image_avatar)
+            viewHolder.textHoten = itemView.findViewById<TextView>(R.id.text_hoten)
+            viewHolder.textMssv = itemView.findViewById<TextView>(R.id.text_mssv)
+            viewHolder.checkSelected = itemView.findViewById<Button>(R.id.check_selected)
+            itemView.tag = viewHolder
+        } else {
+            itemView = p1
+            viewHolder = p1.tag as ViewHolder
+        }
+
+        val student = students[p0]
+        viewHolder.imageAvatar.setImageResource(student.avatarResId)
+        viewHolder.textHoten.text = student.hoten
+        viewHolder.textMssv.text = student.mssv
+//        viewHolder.checkSelected.isChecked = student.selected
+//
+        viewHolder.checkSelected.setOnClickListener {
+            students.removeAt(p0)
+            notifyDataSetChanged()
+        }
+
+        return itemView
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.student, parent, false)
-        return StudentViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
-        val student = studentList[position]
-        holder.textViewName.text = student.name
-        holder.textViewID.text = student.studentID
-    }
-
-    override fun getItemCount() = studentList.size
-
-    fun addStudent(student: Student) {
-        studentList.add(student)
-        notifyItemInserted(studentList.size - 1)
+    class ViewHolder {
+        lateinit var imageAvatar: ImageView
+        lateinit var textHoten: TextView
+        lateinit var textMssv: TextView
+        lateinit var checkSelected: Button
     }
 }
