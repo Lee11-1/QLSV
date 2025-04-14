@@ -1,10 +1,12 @@
 package com.example.qlsv
 
 import android.os.Bundle
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.Button
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class StudentListActivity : AppCompatActivity() {
@@ -13,10 +15,11 @@ class StudentListActivity : AppCompatActivity() {
 
 
         setContentView(R.layout.activity_student_list)
-        val listView = findViewById<ListView>(R.id.list_students)
         val editTextHoten = findViewById<EditText>(R.id.hoten)
         val editTextMssv = findViewById<EditText>(R.id.mssv)
         val buttonAdd = findViewById<Button>(R.id.submit)
+        val recycler = findViewById<RecyclerView>(R.id.list_students)
+
 
         val students = mutableListOf<StudentModel>()
         repeat(28) {
@@ -28,9 +31,8 @@ class StudentListActivity : AppCompatActivity() {
         }
 
         val adapter = StudentAdapter(students)
-
-        val listStudents = findViewById<ListView>(R.id.list_students)
-        listStudents.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = adapter
 
 
 
