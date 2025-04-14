@@ -1,10 +1,10 @@
 package com.example.qlsv
 
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,7 +18,9 @@ class StudentListActivity : AppCompatActivity() {
         val editTextHoten = findViewById<EditText>(R.id.hoten)
         val editTextMssv = findViewById<EditText>(R.id.mssv)
         val buttonAdd = findViewById<Button>(R.id.submit)
+
         val recycler = findViewById<RecyclerView>(R.id.list_students)
+        recycler.setHasFixedSize(true)
 
 
         val students = mutableListOf<StudentModel>()
@@ -47,13 +49,15 @@ class StudentListActivity : AppCompatActivity() {
                     mssv = mssv,
                     avatarResId = R.drawable.thumb0
                 )
-                students.add(newStudent)
-                adapter.notifyDataSetChanged()
+                students.add(1,newStudent)
+                adapter.notifyItemInserted(1)
 
                 editTextHoten.text.clear()
                 editTextMssv.text.clear()
             }
         }
+
+
 
     }
 }
