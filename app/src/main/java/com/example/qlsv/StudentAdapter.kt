@@ -14,9 +14,9 @@ import com.example.qlsv.StudentAdapter.myViewHolder
 class StudentAdapter(val items: MutableList<StudentModel>): RecyclerView.Adapter<myViewHolder>(){
 
     class myViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        val imageAvatar: ImageView = itemView.findViewById((R.id.image_avatar))
-        val textHoten: TextView = itemView.findViewById((R.id.hoten))
-        val textMssv: TextView = itemView.findViewById(R.id.mssv)
+        val imageAvatar: ImageView = itemView.findViewById(R.id.image_avatar)
+        val textHoten: TextView = itemView.findViewById(R.id.text_hoten)
+        val textMssv: TextView = itemView.findViewById(R.id.text_mssv)
         val checkSelected: Button = itemView.findViewById(R.id.check_selected)
     }
 

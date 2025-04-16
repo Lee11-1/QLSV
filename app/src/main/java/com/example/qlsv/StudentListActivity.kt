@@ -50,14 +50,12 @@ class StudentListActivity : AppCompatActivity() {
                     avatarResId = R.drawable.thumb0
                 )
                 students.add(1,newStudent)
-                adapter.notifyItemInserted(1)
+                adapter.notifyItemInserted(0)
 
                 editTextHoten.text.clear()
                 editTextMssv.text.clear()
             }
         }
-
-
 
     }
 }
