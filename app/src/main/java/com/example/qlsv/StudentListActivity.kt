@@ -49,7 +49,7 @@ class StudentListActivity : AppCompatActivity() {
                     mssv = mssv,
                     avatarResId = R.drawable.thumb0
                 )
-                students.add(1,newStudent)
+                students.add(0,newStudent)
                 adapter.notifyItemInserted(0)
 
                 editTextHoten.text.clear()
